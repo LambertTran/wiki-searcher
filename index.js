@@ -16,19 +16,30 @@ function GetWikiData(url){
     })
     .then((data) => {
       AppendNewElement(data);
+      ChangeStyle();
     })
     .catch((err) => {
       throw err;
     })
   }
   
+function ChangeStyle(){
+  const searchBar = document.querySelector('.search-bar');
+  const wrapper = document.querySelector('.wrapper');
+  // change search-bar style when display data
+  searchBar.style.display = "block";
+  searchItem.style.width = '65%';
+  // change wrapper style as well
+  wrapper.style.justifyContent = 'flex-start';
+}
+
 function AppendNewElement(data){
   const resultList = document.querySelector('#wiki-output');
   let newEls= '';
-  for (let i=0; i < data[0].length; ++i) {
+  for (let i=0; i < data[1].length; ++i) {
     newEls += `<li><a href='${data[3][i]}' target='_blank'>`;
-    newEls += `<h5>${data[1][i]}</h5></a>`;
-    newEls += `<p>${data[2][i]}</p></li>`
+    newEls += `<h4>${data[1][i]}</h4></a>`;
+    newEls += `<p>${data[2][i]}</p></li> <hr/>`
   }
   resultList.innerHTML = newEls;
 }
