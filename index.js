@@ -2,7 +2,7 @@ window.addEventListener("load", function(){
   const btn = document.querySelector('#btn');
   btn.addEventListener('click', function(){
     const searchItem = document.querySelector('#searchItem').value;
-    const url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${searchItem}&limit=10&namespace=0&format=json`;
+    const url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${searchItem}&limit=10&namespace=0&format=json&origin=*`;
 
     GetWikiData(url);
     
