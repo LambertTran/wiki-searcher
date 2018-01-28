@@ -1,13 +1,23 @@
 window.addEventListener("load", function(){
   const btn = document.querySelector('#btn');
-  btn.addEventListener('click', function(){
-    const searchItem = document.querySelector('#searchItem').value;
-    const url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${searchItem}&limit=10&namespace=0&format=json&origin=*`;
-
-    GetWikiData(url);
-    
-  });
+  const searchInput = document.querySelector('#searchItem');
+  // fire wiki search when btn is click
+  btn.addEventListener('click', HandleClickEvent);
+  
+  searchInput.addEventListener('keyup', function(event){
+    event.preventDefault();
+    if (event.keyCode === 13){
+      btn.click();
+    }
+  })
 })
+
+
+function HandleClickEvent(){
+  const searchItem = document.querySelector('#searchItem').value;
+  const url = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${searchItem}&limit=10&namespace=0&format=json&origin=*`;
+  GetWikiData(url);
+}
 
 function GetWikiData(url){
   fetch(url)
@@ -25,12 +35,12 @@ function GetWikiData(url){
   
 function ChangeStyle(){
   const searchBar = document.querySelector('.search-bar');
-  const wrapper = document.querySelector('.wrapper');
+  // const search = document.querySelector('.wrapper');
   // change search-bar style when display data
   searchBar.style.display = "block";
   searchItem.style.width = '65%';
+  searchBar.style.padding = '20px';
   // change wrapper style as well
-  wrapper.style.justifyContent = 'flex-start';
 }
 
 function AppendNewElement(data){
